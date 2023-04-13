@@ -36,6 +36,7 @@
     </form>
   </div>
 </div>
+
 <script src="interface/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="interface/bootstrap/js/bootstrap.min.js"></script>
 <script src="interface/plugins/iCheck/icheck.min.js"></script>
@@ -48,5 +49,6 @@
     });
   });
 </script>
+
 </body>
 </html>

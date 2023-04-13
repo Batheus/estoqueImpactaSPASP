@@ -2,7 +2,8 @@
 require_once 'App/auth.php';
 if($usuario && $perm){
 	header('Location: interface/');
-}else{
+}
+else{
 header('Location: login.php');
 }
 ?>

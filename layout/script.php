@@ -1,5 +1,5 @@
 <?php
-$url = 'http://localhost/estoque/interface/';
+$url = 'http://localhost/estoqueimpacta/interface/';
 $head = '<html>
 <head>
   <meta charset="utf-8">
@@ -118,64 +118,6 @@ $header = '<header class="main-header">
 
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-archive"></i>
-            <span>Estoque</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de SKU</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Adicionar SKU</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Estoque Completo</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Estoque Atual</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-mobile" style="font-size:24px"></i>
-            <span>Testes</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Testes</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Registrar Teste</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cogs"></i>
-            <span>Manutenção</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Manutenção</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Registrar Manutenção</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-truck"></i>
-            <span>Fornecedor</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Fornecedores</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Adicionar Fornecedor</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
             <i class="fa fa-users"></i>
             <span>Usuários</span>
             <span class="pull-right-container">
@@ -185,33 +127,6 @@ $header = '<header class="main-header">
           <ul class="treeview-menu">
             <li><a href="'.$url.'usuarios/"><i class="fa fa-circle-o"></i>Lista de Usuários</a></li>
             <li><a href="'.$url.'usuarios/addusuarios.php"><i class="fa fa-circle-o"></i>Adicionar Usuários</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>Cliente</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Clientes</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Adicionar Cliente</a></li>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-shopping-cart"></i>
-            <span>Vendas</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Registrar Venda</a></li>
           </ul>
         </li>
       </ul>
