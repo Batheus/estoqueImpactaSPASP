@@ -21,10 +21,12 @@ if($Username != NULL && $senha != NULL){
 			}
 if(isset($_POST['idUser'])){
 	$idUser = $_POST['idUser'];
+	$senha = md5($_POST['senha']);
 	$usuario->updateUser($idUser, $Username, $Email, $senha, $nomeimagem, $Permissao);
 }
 else{
-$usuario->InsertUser($Username, $Email, $senha, $nomeimagem, $Permissao);
+	$senha = md5($_POST['senha']);
+	$usuario->InsertUser($Username, $Email, $senha, $nomeimagem, $Permissao);
 }
 }
 else{

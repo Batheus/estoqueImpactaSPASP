@@ -1,7 +1,7 @@
 <?php
 session_start();
 $email = $_POST['email'];
-$senha  = $_POST['senha'];
+$senha  = md5($_POST['senha']);
 if($email == NULL || $senha == NULL){
 	echo "<script>alert('Você deve digitar seu email e senha');</script>";
 	echo "<script> window.location.href='../login.php'</script>";

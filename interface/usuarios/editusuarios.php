@@ -41,7 +41,7 @@ echo '
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Senha de acesso:</label>
-                  <input type="text" name="senha" class="form-control" id="exampleInputEmail1" placeholder="Senha de acesso" value="">
+                  <input type="password" name="senha" class="form-control" id="exampleInputEmail1" placeholder="Senha de acesso" value="">
                 </div>
 
                 <div class="form-group">

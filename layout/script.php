@@ -118,6 +118,51 @@ $header = '<header class="main-header">
 
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Produtos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="'.$url.'prod/"><i class="fa fa-circle-o"></i>Lista de Produtos</a></li>
+            <li><a href="'.$url.'prod/addprod.php"><i class="fa fa-circle-o"></i>Adicionar Produtos</a></li>
+            <li><a href="'.$url.'itens/"><i class="fa fa-circle-o"></i>Lista de Itens</a></li>
+            <li><a href="'.$url.'itens/totalitens.php"><i class="fa fa-circle-o"></i>Estoque Itens</a></li>
+            <li><a href="'.$url.'itens/additens.php"><i class="fa fa-circle-o"></i>Adicionar Itens</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Cliente</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="'.$url.'cliente/"><i class="fa fa-circle-o"></i>Lista de Clientes</a></li>
+            <li><a href="'.$url.'cliente/addcliente.php"><i class="fa fa-circle-o"></i>Adicionar Cliente</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Fornecedor</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="'.$url.'fornecedor/"><i class="fa fa-circle-o"></i>Lista de Fornecedores</a></li>            
+            <li><a href="'.$url.'fornecedor/addfornecedor.php"><i class="fa fa-circle-o"></i>Adicionar Fornecedor</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-users"></i>
             <span>Usuários</span>
             <span class="pull-right-container">
