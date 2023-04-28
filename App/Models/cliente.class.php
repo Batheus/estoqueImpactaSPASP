@@ -170,8 +170,8 @@ function search($value){
 
 function searchdata($value){
       $value = explode(' ', $value);
-      $valor = str_replace("." , "" , $value[0] ); // Primeiro tira os pontos
-      $valor = str_replace("-" , "" , $valor); // Depois tira o taço
+      $valor = str_replace("." , "" , $value[0] );
+      $valor = str_replace("-" , "" , $valor);
       $value = $valor;
       if(isset($value))  
       {

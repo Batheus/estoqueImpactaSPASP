@@ -20,7 +20,7 @@
           <div class="tools right">
                       <a href="" data-toggle="modal" data-target="#myModalup'.$row['CodRefProduto'].'"><i class="fa fa-edit"></i></a>
                     <a href="" data-toggle="modal" data-target="#myModal'.$row['CodRefProduto'].'">';
-                    if($row['PublicProduto'] == 0){echo '<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-ok" aria-hidden="true"></i>';}
+                    if($row['PublicProduto'] == 0){echo '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';}
                     echo '</a> </div>
   <div class="modal fade" id="myModal'.$row['CodRefProduto'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <form id="delprod'.$row['CodRefProduto'].'" name="delprod'.$row['CodRefProduto'].'" action="../../App/Database/delprod.php" method="post" style="color:#000;">
@@ -75,9 +75,7 @@
     </div>
         </li>';
       }
-
     }
-
   }
 
   public function listProdutos(){
@@ -109,7 +107,8 @@
   public function UpdateProd($id, $skuProduto, $nomeProduto, $idUsuario){
       if(mysqli_query($this->SQL, "UPDATE `produtos` SET `skuProduto` = '$skuProduto', `NomeProduto` = '$nomeProduto', `Usuario_idUser` = '$idUsuario' WHERE `CodRefProduto` = '$id'") or die(mysqli_error($this->SQL))){
                 header('Location: ../../interface/prod/index.php?alert=1');
-      }else{
+      }
+      else{
                 header('Location: ../../interface/prod/index.php?alert=0');
               }
 }

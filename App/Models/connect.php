@@ -82,6 +82,5 @@ class Connect{
 	   }
 	   return $maskared;
    }
-   
 }
 $connect = new Connect; 

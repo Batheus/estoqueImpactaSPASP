@@ -35,7 +35,7 @@ class Fornecedor extends Connect{
                   <a href="editfornecedor.php?id='.$row['idFornecedor'].'"><i class="fa fa-edit"></i></a>
                 <a href="" data-toggle="modal" data-target="#myModal'.$row['idFornecedor'].'">';
 
-                if($row['Public'] == 0){echo '<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-ok" aria-hidden="true"></i>';}
+                if($row['Public'] == 0){echo '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';}
 
                 echo '</a> </div>
 
@@ -58,13 +58,11 @@ class Fornecedor extends Connect{
       </div>
     </div>
   </div>
-  
 </form>
 </div>
 </li>';
        }     			
      }
-
 }
 
 public function listfornecedor(){
@@ -98,12 +96,9 @@ public function InsertFornecedor($NomeFornecedor, $CNPJFornecedor, $EmailFornece
       $idFornecedor = $row['idFornecedor'];
     }
     else{
-
      $query = "INSERT INTO `fornecedor`(`NomeFornecedor`, `CNPJFornecedor`, `EmailFornecedor`, `EnderecoFornecedor`, `TelefoneFornecedor`, `Public`, `Ativo`, `Usuario_idUser`) VALUES ('$NomeFornecedor', '$CNPJFornecedor', '$EmailFornecedor', '$EnderecoFornecedor', '$TelefoneFornecedor', 1 , 1 , '$idUsuario')";
-    
       $result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL));
       $idFornecedor = mysqli_insert_id($this->SQL);
-    
     }
       if($idFornecedor > 0){ 
           if($this->query = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){

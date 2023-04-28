@@ -98,7 +98,7 @@
           </td>
           <td>
                     <a href="" data-toggle="modal" data-target="#myModal'.$row['idItens'].'">';
-                    if($row['Public'] == 0){echo '<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-ok" aria-hidden="true"></i>';}
+                    if($row['Public'] == 0){echo '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';}
                     echo '</a>
   <div>
     <form id="delItens'.$row['idItens'].'" name="delItens'.$row['idItens'].'" action="../../App/Database/delItens.php" method="post" style="color:#000;">
@@ -131,7 +131,7 @@
 
       public function InsertItens($nomeimagem, $QuantItens, $MarcaItens, $ModeloItens, $MemoriaItens, $CorItens, $GradeItens, $LocalItens, $Produto_CodRefProduto, $Fornecedor_idFornecedor, $idusuario){
        $this->query = "INSERT INTO `itens`(`idItens`,`Image` ,`QuantItens`, `QuantItensVend`, `MarcaItens`, `ModeloItens`, `MemoriaItens`, `CorItens`, `GradeItens`, `LocalItens`, `ItensAtivo`,`ItensPublic`, `Produto_CodRefProduto`, `Fornecedor_idFornecedor`, `Usuario_idUser`) VALUES 
-       (NULL, '$nomeimagem', '$QuantItens', 0, '$MarcaItens', '$ModeloItens', '$ValMemoriaItens', '$CorItens', '$GradeItens', '$LocalItens', 1, 1, '$Produto_CodRefProduto', '$Fornecedor_idFornecedor', '$idusuario')";
+       (NULL, '$nomeimagem', '$QuantItens', 0, '$MarcaItens', '$ModeloItens', '$MemoriaItens', '$CorItens', '$GradeItens', '$LocalItens', 1, 1, '$Produto_CodRefProduto', '$Fornecedor_idFornecedor', '$idusuario')";
        if($this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
         header('Location: ../../interface/itens/index.php?alert=1');
       }
