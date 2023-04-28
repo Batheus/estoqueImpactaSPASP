@@ -53,7 +53,6 @@ echo '<a href="./" class="btn btn-success">Voltar</a>
                 </div>
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
                  <input type="hidden" name="idCliente" value="'.$idCliente.'">
-
               <div class="box-footer">
                 <button type="submit" name="upload" class="btn btn-primary" value="Cadastrar">Cadastrar</button>
                 <a class="btn btn-danger" href="../../interface/cliente">Cancelar</a>

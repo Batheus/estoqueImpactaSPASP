@@ -25,16 +25,12 @@ class Cliente extends Connect{
                     <input type="hidden" name="tabela" id="tabela" value="cliente"></form>';
                     echo '
     <span class="text"> '.$row['NomeCliente'].' </span>
-    
                       <div class="tools right">
                       <a href="editcliente.php?id='.$row['idCliente'].'"><i class="fa fa-edit"></i></a>
                     <a href="" data-toggle="modal" data-target="#myModal'.$row['idCliente'].'">';
-    
                     echo '</a> </div>
-    
     <div class="modal fade" id="myModal'.$row['idCliente'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <form id="delFab'.$row['idCliente'].'" name="delFab'.$row['idCliente'].'" action="../../App/Database/delcliente.php" method="post" style="color:#000;">
-    
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -51,7 +47,6 @@ class Cliente extends Connect{
           </div>
         </div>
       </div>
-      
     </form>
     </div>
     </li>';
@@ -124,10 +119,8 @@ public function EditCliente($idCliente){
 }
 
 function statusCliente($status, $idCliente){
-        
         $this->query = "UPDATE `cliente` SET `statusCliente`= '$status' WHERE `idCliente`= '$idCliente'";
         $this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
-
         if($this->result){
           return 1;
         }
@@ -195,7 +188,7 @@ function searchdata($value){
           return $value;
         } 
       }  
-    }
+}
     
 public function dadoscliente($idCliente){
         $this->client = "SELECT * FROM `cliente` WHERE `idCliente` = '$idCliente'";

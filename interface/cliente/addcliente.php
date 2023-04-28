@@ -48,7 +48,6 @@ if($perm != 1){
                     <label for="exampleInputEmail1">E-mail</label>
                     <input type="text" name="EmailCliente" class="form-control" id="exampleInputEmail1" placeholder="E-mail">
                   </div>
-
                 <div class="box-footer">
                   <button type="submit" name="upload" class="btn btn-primary" value="Cadastrar">Cadastrar</button>
                   <a class="btn btn-danger" href="../../interface/cliente">Cancelar</a>
