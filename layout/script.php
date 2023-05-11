@@ -163,6 +163,34 @@ $header = '<header class="main-header">
 
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-cogs"></i>
+            <span>Manutenção</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="'.$url.'manutencao/"><i class="fa fa-circle-o"></i>Lista de Manutenção</a></li>
+            <li><a href="'.$url.'manutencao/addmanutencao.php"><i class="fa fa-circle-o"></i>Registrar Manutenção</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-mobile" style="font-size:24px"></i>
+            <span>Testes</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="'.$url.'teste/"><i class="fa fa-circle-o"></i>Lista de Testes</a></li>
+            <li><a href="'.$url.'teste/addteste.php"><i class="fa fa-circle-o"></i>Registrar Teste</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-users"></i>
             <span>Usuários</span>
             <span class="pull-right-container">

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 13, 2023 at 10:06 PM
--- Server version: 8.0.31
--- PHP Version: 8.0.26
+-- Tempo de geração: 11-Maio-2023 às 17:30
+-- Versão do servidor: 8.0.31
+-- versão do PHP: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,144 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `estoque`
+-- Banco de dados: `estoque`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estrutura da tabela `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `idCliente` int NOT NULL AUTO_INCREMENT,
+  `NomeCliente` varchar(100) NOT NULL,
+  `EmailCliente` varchar(100) NOT NULL,
+  `cpfCliente` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `pedCliente` varchar(100) NOT NULL,
+  `telCliente` varchar(100) NOT NULL,
+  `statusCliente` int NOT NULL,
+  `Usuario_idUsuario` int NOT NULL,
+  `dataRegCliente` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idCliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `NomeCliente`, `EmailCliente`, `cpfCliente`, `pedCliente`, `telCliente`, `statusCliente`, `Usuario_idUsuario`, `dataRegCliente`) VALUES
+(9, 'Matheus Henrique', 'mathhenry395@gmail.com', '23769929829', '0', '', 1, 3, '2020-07-27 19:11:51'),
+(10, 'Fabrício Rodrigues', 'fabriciocliente@cliente.com', '12345678910', '', '', 1, 3, '2020-08-07 17:54:48'),
+(15, 'Diego Tales Silva', 'diogo@cliente.com', '46849588156', '', '', 1, 3, '2023-04-27 22:09:39'),
+(16, 'Abel Braga', 'abel@palmeiras.com', '98561248925', '', '', 1, 3, '2023-04-27 22:44:30'),
+(17, 'Rogério Ceni', 'rogerio@spfc.com', '66425318759', '', '', 1, 3, '2023-04-27 22:45:12'),
+(18, 'João Paulo', 'joaopaulo@gmail.com', '15948746856', '', '', 1, 3, '2023-04-28 21:42:48'),
+(19, 'Rodrigo Caio Silva', 'rodrigo@cliente.net', '55544488822', '', '', 1, 3, '2023-04-28 21:45:36'),
+(20, 'João Paulo Silva', 'joaopaulo@gmail.com', '44466688899', '', '', 1, 3, '2023-04-28 21:49:49'),
+(21, 'José Rodrigues Silva', 'jose@cliente.com', '44566877599', '', '', 1, 3, '2023-04-28 22:01:15');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `fornecedor`
+--
+
+DROP TABLE IF EXISTS `fornecedor`;
+CREATE TABLE IF NOT EXISTS `fornecedor` (
+  `idFornecedor` int NOT NULL AUTO_INCREMENT,
+  `NomeFornecedor` varchar(75) NOT NULL,
+  `CNPJFornecedor` varchar(75) NOT NULL,
+  `EmailFornecedor` varchar(75) NOT NULL,
+  `EnderecoFornecedor` varchar(75) NOT NULL,
+  `TelefoneFornecedor` varchar(75) NOT NULL,
+  `Public` int NOT NULL,
+  `Ativo` int NOT NULL,
+  `Usuario_idUser` int NOT NULL,
+  PRIMARY KEY (`idFornecedor`),
+  KEY `fk_Fornecedor_Usuario1_idx` (`Usuario_idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Extraindo dados da tabela `fornecedor`
+--
+
+INSERT INTO `fornecedor` (`idFornecedor`, `NomeFornecedor`, `CNPJFornecedor`, `EmailFornecedor`, `EnderecoFornecedor`, `TelefoneFornecedor`, `Public`, `Ativo`, `Usuario_idUser`) VALUES
+(22, 'Trocafone', '20.553.221/0001-02', 'trocafone@comercial.com', 'Rua Frei Galvão, 91, Jardim Paulistano, São Paulo - SP. CEP 01454-060', '(11) 4003-1641', 1, 1, 3),
+(23, 'CenterCell', '03.956.519/0001-36', 'atendimento@centercell.com.br', 'AV LIBERDADE, 4565 - BLOCOS M13, N14, E G07 CEP 18087-170 | SOROCABA - SP |', '+55(15) 4009-0880', 1, 1, 3),
+(24, 'Liquidacell', '15.436.940/0001-03', 'liquidacell@comercial.com', 'Av. Juscelino Kubitschek, 2041, Torre E, 18° andar - São Paulo', '(11)91234-5678', 0, 1, 3),
+(30, 'Casas Bahia Smartphones', '01.444.567/0001-08', 'casasbahia@cnpj.com', 'Rua 2, bairro Santa Maria - Campinas, SP', '1145897455', 1, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `itens`
+--
+
+DROP TABLE IF EXISTS `itens`;
+CREATE TABLE IF NOT EXISTS `itens` (
+  `idItens` int NOT NULL AUTO_INCREMENT,
+  `Image` varchar(250) NOT NULL,
+  `QuantItens` decimal(10,0) NOT NULL,
+  `QuantItensVend` decimal(10,0) NOT NULL,
+  `ModeloItens` varchar(100) NOT NULL,
+  `MarcaItens` varchar(80) NOT NULL,
+  `MemoriaItens` varchar(10) NOT NULL,
+  `CorItens` varchar(100) NOT NULL,
+  `GradeItens` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `LocalItens` varchar(50) NOT NULL,
+  `ItensAtivo` tinyint NOT NULL,
+  `ItensPublic` int NOT NULL,
+  `Produto_CodRefProduto` int NOT NULL,
+  `Fornecedor_idFornecedor` int NOT NULL,
+  `Usuario_idUser` int NOT NULL,
+  `DataRegistro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idItens`),
+  KEY `fk_Itens_Produto1_idx` (`Produto_CodRefProduto`),
+  KEY `fk_Itens_Fornecedor1_idx` (`Fornecedor_idFornecedor`),
+  KEY `fk_Itens_Usuario1_idx` (`Usuario_idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Extraindo dados da tabela `itens`
+--
+
+INSERT INTO `itens` (`idItens`, `Image`, `QuantItens`, `QuantItensVend`, `ModeloItens`, `MarcaItens`, `MemoriaItens`, `CorItens`, `GradeItens`, `LocalItens`, `ItensAtivo`, `ItensPublic`, `Produto_CodRefProduto`, `Fornecedor_idFornecedor`, `Usuario_idUser`, `DataRegistro`) VALUES
+(24, 'dist/img/iphone5sred.jpg', '25', '0', 'iPhone 5s', 'Apple', '64gb', 'Vermelho', 'B', 'Prateleira B', 1, 1, 9, 22, 3, '2023-04-28 00:21:00'),
+(25, 'dist/img/ip11red.jpg', '10', '0', 'iPhone 11', 'Apple', '128gb', 'Vermelho', 'C', 'Prateleira C', 1, 1, 46, 22, 3, '2023-04-28 00:21:34');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produtos`
+--
+
+DROP TABLE IF EXISTS `produtos`;
+CREATE TABLE IF NOT EXISTS `produtos` (
+  `CodRefProduto` int NOT NULL AUTO_INCREMENT,
+  `skuProduto` varchar(75) NOT NULL,
+  `NomeProduto` varchar(75) NOT NULL,
+  `Ativo` int NOT NULL,
+  `PublicProduto` int NOT NULL,
+  `Usuario_idUser` int NOT NULL,
+  PRIMARY KEY (`CodRefProduto`),
+  KEY `fk_Produto_Usuario_idx` (`Usuario_idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`CodRefProduto`, `skuProduto`, `NomeProduto`, `Ativo`, `PublicProduto`, `Usuario_idUser`) VALUES
+(9, 'GA1626RED64GB', 'iPhone 5s 64gb RED', 1, 1, 3),
+(46, 'GA5548BLUE128gb', 'iPhone 11 128gb Azul', 1, 1, 3),
+(51, 'SMGLS23U512GB', 'Samsung Galaxy S23 Ultra Violeta 512GB', 1, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuario`
 --
 
 DROP TABLE IF EXISTS `usuario`;
@@ -37,15 +168,16 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Dataregistro` date NOT NULL,
   `Permissao` tinyint NOT NULL,
   PRIMARY KEY (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `usuario`
+-- Extraindo dados da tabela `usuario`
 --
 
 INSERT INTO `usuario` (`idUser`, `Username`, `Email`, `senha`, `imagem`, `Dataregistro`, `Permissao`) VALUES
-(3, 'Administrador Matheus', 'admin@estoque.com', 'admin', 'dist/img/avatar5.png', '2023-04-03', 1),
-(4, 'Vendedor Matheus', 'vendedor@estoque.com', '21232f297a57a5a743894a0e4a801fc3', 'dist/img/avatar04.png', '2023-04-05', 2);
+(3, 'Administrador', 'admin@estoque.com', '21232f297a57a5a743894a0e4a801fc3', 'dist/img/avatar5.png', '2023-04-03', 1),
+(4, 'Vendedor', 'vendedor@estoque.com', '0407e8c8285ab85509ac2884025dcf42', 'dist/img/avatar04.png', '2023-04-05', 2),
+(6, 'Fabrício Silva', 'fabricio@estoque.com', 'cabe789b3751afc7bacf5b3748f3e8cd', 'dist/img/iconePerfil.png', '2023-04-13', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
