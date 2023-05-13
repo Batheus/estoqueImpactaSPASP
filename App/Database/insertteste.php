@@ -5,15 +5,11 @@ require_once '../Models/teste.class.php';
 if(isset($_POST['upload']) == 'Cadastrar'){
 
 	//---Informações Principais---//
-	$FuncionarioTeste = $_POST['FuncionarioTeste'];
-	$AparelhoTeste = $_POST['AparelhoTeste'];
 	$ModeloTeste = $_POST['ModeloTeste'];
 	$IMEITeste = $_POST['IMEITeste'];
 	$StatusTeste = $_POST['StatusTeste'];
-	$ObservacaoTeste = $_POST['ObservacaoTeste'];
+	$ObsTeste = $_POST['ObsTeste'];
 	$GradeTeste = $_POST['GradeTeste'];
-	$FornecedorTeste = $_POST['FornecedorTeste'];
-	$Public = $_POST['Public'];
 
 	//--Checklist--//
 	$Wifi = $_POST['Wifi'];
@@ -41,20 +37,22 @@ if(isset($_POST['upload']) == 'Cadastrar'){
 	$Carcaca = $_POST['Carcaca'];
 	$Tela = $_POST['Tela'];
 	$Traseira = $_POST['Traseira'];
-	$status = 1;
+	$Produto_CodRefProduto = $_POST['codProduto'];
+	$Fornecedor_idFornecedor = $_POST['idFornecedor'];
 	$iduser = $_POST['iduser'];
 
-	if($iduser == $idUsuario && $IMEITeste != NULL){
-			if (!isset($_POST['idTeste'])){
-				$teste->InsertTeste($FuncionarioTeste, $AparelhoTeste, $ModeloTeste, $IMEITeste, $StatusTeste, $ObservacaoTeste, $GradeTeste, $FornecedorTeste, $Wifi, $ConectorUSB, $ConectorP2, $Bateria, $Display, $Touch, $Biometria, $Botoes, $Vibracall, $CamT, $CamF, $Flash, $Chip1, $Chip2, $AntRede, $Mic1, $Mic2, $Sensor, $VivaVoz, $SiriGoogle, $Carcaca, $Tela, $Traseira, $idUsuario, $status);
-		}else{
-				$idTeste = $_POST['idTeste'];
-				$teste->UpdateTeste($idTeste, $FuncionarioTeste, $AparelhoTeste, $ModeloTeste, $IMEITeste, $StatusTeste, $ObservacaoTeste, $GradeTeste, $FornecedorTeste, $Wifi, $ConectorUSB, $ConectorP2, $Bateria, $Display, $Touch, $Biometria, $Botoes, $Vibracall, $CamT, $CamF, $Flash, $Chip1, $Chip2, $AntRede, $Mic1, $Mic2, $Sensor, $VivaVoz, $SiriGoogle, $Carcaca, $Tela, $Traseira, $Public, $idUsuario);		
-			}
-		}else{
-				header('Location: ../../interface/teste/index.php?alert=3');
-			}
-}
-else{
-	header('Location: ../../interface/teste/index.php');
-}
+	if($iduser == $idUsuario){
+	if(isset($_POST['idTeste'])){
+		$idTeste = $_POST['idTeste'];
+		$teste->updateTeste($idTeste, $ModeloTeste, $IMEITeste, $StatusTeste, $ObsTeste, $GradeTeste, $Wifi, $ConectorUSB, $ConectorP2, $Bateria, $Display, $Touch, $Biometria, $Botoes, $Vibracall, $CamT, $CamF, $Flash, $Chip1, $Chip2, $AntRede, $Mic1, $Mic2, $Sensor, $VivaVoz, $SiriGoogle, $Carcaca, $Tela, $Traseira, $Produto_CodRefProduto, $Fornecedor_idFornecedor, $idUsuario);
+	}
+	else{
+	$teste->InsertTeste($ModeloTeste, $IMEITeste, $StatusTeste, $ObsTeste, $GradeTeste, $Wifi, $ConectorUSB, $ConectorP2, $Bateria, $Display, $Touch, $Biometria, $Botoes, $Vibracall, $CamT, $CamF, $Flash, $Chip1, $Chip2, $AntRede, $Mic1, $Mic2, $Sensor, $VivaVoz, $SiriGoogle, $Carcaca, $Tela, $Traseira, $Produto_CodRefProduto, $Fornecedor_idFornecedor, $idUsuario);
+	}
+	}
+	else{
+		header('Location: ../../interface/teste/index.php?alert=3');
+	}
+	}else{
+		header('Location: ../../interface/teste/index.php');
+	}

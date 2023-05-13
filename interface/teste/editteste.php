@@ -1,215 +1,212 @@
 <?php
 require_once '../../App/auth.php';
 require_once '../../layout/script.php';
+require_once '../../App/Models/produtos.class.php';
+require_once '../../App/Models/fornecedor.class.php';
 require_once '../../App/Models/teste.class.php';
 
+if(isset($_GET['q'])){
+$resp = $teste->editTeste($_GET['q']);
 echo $head;
 echo $header;
 echo $aside;
+
 echo '<div class="content-wrapper">';
-echo '<section class="content-header">
+echo '
+    <section class="content-header">
       <h1>
-        Editar Teste
+        Editar <small>Teste</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="../"><i class="fa fa-laptop"></i> Home</a></li>
-        <li class="active">Testes</li>
+        <li class="active">Teste</li>
       </ol>
     </section>
     <section class="content">
       <div class="row">';
 
-echo ' <a href="./" class="btn btn-success">Voltar</a>
-      <div class="row">';
-        if(isset($_GET['id'])){
-          $idTeste = $_GET['id'];
-       $resp = $teste->EditTeste($idTeste);
-
-echo '<div class="col-md-6">
+echo ' 
+      <div class="row">
+        <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Informações Principais</h3>
+              <h3 class="box-title">Teste</h3>
             </div>
-            <form role="form" action="../../App/Database/insertteste.php" method="POST">
+            <form role="form" enctype="multipart/form-data" action="../../App/Database/insertteste.php" method="POST">
               <div class="box-body">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Funcionário</label>
-                  <input type="text" name="FuncionarioTeste" class="form-control" id="exampleInputEmail1" placeholder="Funcionário" value="'.$resp['Teste']['Funcionario'].'">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Aparelho</label>
-                  <input type="text" name="AparelhoTeste" class="form-control" id="exampleInputEmail1" placeholder="Aparelho" value="'.$resp['Teste']['Aparelho'].'">
-                </div>
+              	<div class="form-group">
+                  <label for="exampleInputEmail1">SKU</label>
+            <select class="form-control" name="codProduto">';
+            $produtos->listProdutos($resp['Teste']['CodRefProduto']);
+            echo '</select>
+            </div>
+            <div class="form-group">
+                  <label for="exampleInputEmail1">Fornecedor</label>
+            <select class="form-control" name="idFornecedor">';
+            $fornecedor->listfornecedor($resp['Teste']['idFornecedor']);
+            echo '</select>
+            </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Modelo</label>
-                  <input type="text" name="ModeloTeste" class="form-control" id="exampleInputEmail1" placeholder="Modelo" value="'.$resp['Teste']['Modelo'].'">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">IMEI</label>
-                  <input type="text" name="IMEITeste" class="form-control" id="exampleInputEmail1" placeholder="IMEI" value="'.$resp['Teste']['IMEI'].'">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Status</label>
-                  <input type="text" name="StatusTeste" class="form-control" id="exampleInputEmail1" placeholder="Status" value="'.$resp['Teste']['Status'].'">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Observação</label>
-                  <input type="text" name="ObservacaoTeste" class="form-control" id="exampleInputEmail1" placeholder="Observação" value="'.$resp['Teste']['Observacao'].'">
+                  <input type="text" name="ModeloTeste" class="form-control" id="exampleInputEmail1" placeholder="Modelo" value="'.$resp['Teste']['ModeloTeste'].'">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Grade</label>
-                  <input type="text" name="GradeTeste" class="form-control" id="exampleInputEmail1" placeholder="Grade" value="'.$resp['Teste']['Grade'].'">
+                  <input type="text" name="GradeTeste" class="form-control" id="exampleInputEmail1" placeholder="Grade" value="'.$resp['Teste']['GradeTeste'].'">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Fornecedor</label>
-                  <input type="text" name="FornecedorTeste" class="form-control" id="exampleInputEmail1" placeholder="Fornecedor" value="'.$resp['Teste']['Fornecedor'].'">
+                  <label for="exampleInputEmail1">IMEI</label>
+                  <input type="text" name="IMEITeste" class="form-control" id="exampleInputEmail1" placeholder="IMEI" value="'.$resp['Teste']['IMEITeste'].'">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Status da manutenção</label>
+                  <input type="text" name="StatusTeste" class="form-control" id="exampleInputEmail1" placeholder="Status da manutenção" value="'.$resp['Teste']['StatusTeste'].'">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Observação da manutenção</label>
+                  <input type="text" name="ObsTeste" class="form-control" id="exampleInputEmail1" placeholder="Observação da manutenção" value="'.$resp['Teste']['ObsTeste'].'">
                 </div>
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Publicar</label>
-                  <select name="Ativo">';
-                    $Ativo = $resp['Teste']['Ativo'];
-                  if($Ativo == 1){
-                    $selected1 = "selected";
-                    $selected0 = " ";
-                  }else{
-                    $selected1 = " ";
-                    $selected0 = "selected";
-                  }
-
-                  echo '
-                  <option value="1" '.$selected1.' >SIM</option>
-                  <option value="0" '.$selected0.' >NÃO</option>
-                  </select>
-                  
-                </div>  
-                
-                <div class="box-header with-border">
-                  <h3 class="box-title">Checklist Funcional</h3>
+                    <label for="exampleInputEmail1">Wifi</label><br>
+                    <input type="radio" name="Wifi" value="Funcionando" ' . (($resp['Teste']['Wifi'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Wifi" value="Defeituoso" ' . (($resp['Teste']['Wifi'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
                 </div>
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Wifi</label>
-                  <input type="text" name="Wifi" class="form-control" id="exampleInputEmail1" placeholder="Wifi" value="'.$resp['Teste']['Wifi'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Conector USB</label>
-                  <input type="text" name="ConectorUSB" class="form-control" id="exampleInputEmail1" placeholder="Conector USB" value="'.$resp['Teste']['ConectorUSB'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Conector P2</label>
-                  <input type="text" name="ConectorP2" class="form-control" id="exampleInputEmail1" placeholder="Conector P2" value="'.$resp['Teste']['ConectorP2'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Bateria</label>
-                  <input type="text" name="Bateria" class="form-control" id="exampleInputEmail1" placeholder="Bateria" value="'.$resp['Teste']['Bateria'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Display</label>
-                  <input type="text" name="Display" class="form-control" id="exampleInputEmail1" placeholder="Display" value="'.$resp['Teste']['Display'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Touch</label>
-                  <input type="text" name="Touch" class="form-control" id="exampleInputEmail1" placeholder="Touch" value="'.$resp['Teste']['Touch'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Biometria</label>
-                  <input type="text" name="Biometria" class="form-control" id="exampleInputEmail1" placeholder="Biometria" value="'.$resp['Teste']['Biometria'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Botões</label>
-                  <input type="text" name="Botoes" class="form-control" id="exampleInputEmail1" placeholder="Botões" value="'.$resp['Teste']['Botoes'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Vibracall</label>
-                  <input type="text" name="Vibracall" class="form-control" id="exampleInputEmail1" placeholder="Vibracall" value="'.$resp['Teste']['Vibracall'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Câmera Traseira</label>
-                  <input type="text" name="CamT" class="form-control" id="exampleInputEmail1" placeholder="Câmera Traseira" value="'.$resp['Teste']['CamT'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Câmera Frontal</label>
-                  <input type="text" name="CamF" class="form-control" id="exampleInputEmail1" placeholder="Câmera Frontal" value="'.$resp['Teste']['CamF'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Flash</label>
-                  <input type="text" name="Flash" class="form-control" id="exampleInputEmail1" placeholder="Flash" value="'.$resp['Teste']['Flash'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Chip 1</label>
-                  <input type="text" name="Chip1" class="form-control" id="exampleInputEmail1" placeholder="Chip 1" value="'.$resp['Teste']['Chip1'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Chip 2</label>
-                  <input type="text" name="Chip2" class="form-control" id="exampleInputEmail1" placeholder="Chip 2" value="'.$resp['Teste']['Chip2'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Antena de Rede</label>
-                  <input type="text" name="AntRede" class="form-control" id="exampleInputEmail1" placeholder="Antena de Rede" value="'.$resp['Teste']['AntRede'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Microfone 1</label>
-                  <input type="text" name="Mic1" class="form-control" id="exampleInputEmail1" placeholder="Microfone 1" value="'.$resp['Teste']['Mic1'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Microfone 2</label>
-                  <input type="text" name="Mic2" class="form-control" id="exampleInputEmail1" placeholder="Microfone 2" value="'.$resp['Teste']['Mic2'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Sensor</label>
-                  <input type="text" name="Sensor" class="form-control" id="exampleInputEmail1" placeholder="Sensor" value="'.$resp['Teste']['Sensor'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">VivaVoz</label>
-                  <input type="text" name="VivaVoz" class="form-control" id="exampleInputEmail1" placeholder="VivaVoz" value="'.$resp['Teste']['VivaVoz'].'">
-                </div>
-                
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Siri/Google</label>
-                  <input type="text" name="SiriGoogle" class="form-control" id="exampleInputEmail1" placeholder="Siri/Google" value="'.$resp['Teste']['SiriGoogle'].'">
-                </div>
-                
-                <div class="box-header with-border">
-                  <h3 class="box-title">Checklist Cosmético</h3>
+                    <label for="exampleInputEmail1">ConectorUSB</label><br>
+                    <input type="radio" name="ConectorUSB" value="Funcionando" ' . (($resp['Teste']['ConectorUSB'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="ConectorUSB" value="Defeituoso" ' . (($resp['Teste']['ConectorUSB'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
                 </div>
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Carcaça</label>
-                  <input type="text" name="Carcaca" class="form-control" id="exampleInputEmail1" placeholder="Carcaça" value="'.$resp['Teste']['Carcaca'].'">
+                    <label for="exampleInputEmail1">ConectorP2</label><br>
+                    <input type="radio" name="ConectorP2" value="Funcionando" ' . (($resp['Teste']['ConectorP2'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="ConectorP2" value="Defeituoso" ' . (($resp['Teste']['ConectorP2'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
                 </div>
-                
+
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Tela</label>
-                  <input type="text" name="Tela" class="form-control" id="exampleInputEmail1" placeholder="Tela" value="'.$resp['Teste']['Tela'].'">
+                    <label for="exampleInputEmail1">Bateria</label><br>
+                    <input type="radio" name="Bateria" value="Funcionando" ' . (($resp['Teste']['Bateria'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Bateria" value="Defeituoso" ' . (($resp['Teste']['Bateria'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
                 </div>
-                
+
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Traseira</label>
-                  <input type="text" name="Traseira" class="form-control" id="exampleInputEmail1" placeholder="Traseira" value="'.$resp['Teste']['Traseira'].'">
+                    <label for="exampleInputEmail1">Display</label><br>
+                    <input type="radio" name="Display" value="Funcionando" ' . (($resp['Teste']['Display'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Display" value="Defeituoso" ' . (($resp['Teste']['Display'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
                 </div>
-                                
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Touch</label><br>
+                    <input type="radio" name="Touch" value="Funcionando" ' . (($resp['Teste']['Touch'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Touch" value="Defeituoso" ' . (($resp['Teste']['Touch'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Biometria</label><br>
+                    <input type="radio" name="Biometria" value="Funcionando" ' . (($resp['Teste']['Biometria'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Biometria" value="Defeituoso" ' . (($resp['Teste']['Biometria'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Botoes</label><br>
+                    <input type="radio" name="Botoes" value="Funcionando" ' . (($resp['Teste']['Botoes'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Botoes" value="Defeituoso" ' . (($resp['Teste']['Botoes'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Vibracall</label><br>
+                    <input type="radio" name="Vibracall" value="Funcionando" ' . (($resp['Teste']['Vibracall'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Vibracall" value="Defeituoso" ' . (($resp['Teste']['Vibracall'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">CamT</label><br>
+                    <input type="radio" name="CamT" value="Funcionando" ' . (($resp['Teste']['CamT'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="CamT" value="Defeituoso" ' . (($resp['Teste']['CamT'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">CamF</label><br>
+                    <input type="radio" name="CamF" value="Funcionando" ' . (($resp['Teste']['CamF'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="CamF" value="Defeituoso" ' . (($resp['Teste']['CamF'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Flash</label><br>
+                    <input type="radio" name="Flash" value="Funcionando" ' . (($resp['Teste']['Flash'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Flash" value="Defeituoso" ' . (($resp['Teste']['Flash'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Chip1</label><br>
+                    <input type="radio" name="Chip1" value="Funcionando" ' . (($resp['Teste']['Chip1'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Chip1" value="Defeituoso" ' . (($resp['Teste']['Chip1'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Chip2</label><br>
+                    <input type="radio" name="Chip2" value="Funcionando" ' . (($resp['Teste']['Chip2'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Chip2" value="Defeituoso" ' . (($resp['Teste']['Chip2'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">AntRede</label><br>
+                    <input type="radio" name="AntRede" value="Funcionando" ' . (($resp['Teste']['AntRede'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="AntRede" value="Defeituoso" ' . (($resp['Teste']['AntRede'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Mic1</label><br>
+                    <input type="radio" name="Mic1" value="Funcionando" ' . (($resp['Teste']['Mic1'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Mic1" value="Defeituoso" ' . (($resp['Teste']['Mic1'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Mic2</label><br>
+                    <input type="radio" name="Mic2" value="Funcionando" ' . (($resp['Teste']['Mic2'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Mic2" value="Defeituoso" ' . (($resp['Teste']['Mic2'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Sensor</label><br>
+                    <input type="radio" name="Sensor" value="Funcionando" ' . (($resp['Teste']['Sensor'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Sensor" value="Defeituoso" ' . (($resp['Teste']['Sensor'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">VivaVoz</label><br>
+                    <input type="radio" name="VivaVoz" value="Funcionando" ' . (($resp['Teste']['VivaVoz'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="VivaVoz" value="Defeituoso" ' . (($resp['Teste']['VivaVoz'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">SiriGoogle</label><br>
+                    <input type="radio" name="SiriGoogle" value="Funcionando" ' . (($resp['Teste']['SiriGoogle'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="SiriGoogle" value="Defeituoso" ' . (($resp['Teste']['SiriGoogle'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Carcaca</label><br>
+                    <input type="radio" name="Carcaca" value="Funcionando" ' . (($resp['Teste']['Carcaca'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Carcaca" value="Defeituoso" ' . (($resp['Teste']['Carcaca'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tela</label><br>
+                    <input type="radio" name="Tela" value="Funcionando" ' . (($resp['Teste']['Tela'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Tela" value="Defeituoso" ' . (($resp['Teste']['Tela'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Traseira</label><br>
+                    <input type="radio" name="Traseira" value="Funcionando" ' . (($resp['Teste']['Traseira'] == 'Funcionando') ? 'checked' : '') . '> Funcionando
+                    <input type="radio" name="Traseira" value="Defeituoso" ' . (($resp['Teste']['Traseira'] == 'Defeituoso') ? 'checked' : '') . '> Defeituoso
+                </div>
+
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
-                 <input type="hidden" name="idTeste" value="'.$idTeste.'">
-
+                 <input type="hidden" name="idTeste" value="'.$resp['Teste']['idTeste'].'">
               <div class="box-footer">
                 <button type="submit" name="upload" class="btn btn-primary" value="Cadastrar">Cadastrar</button>
                 <a class="btn btn-danger" href="../../interface/teste">Cancelar</a>
@@ -218,12 +215,13 @@ echo '<div class="col-md-6">
           </div>
           </div>
 </div>';
-}
-
 echo '</div>';
 echo '</div>';
 echo '</section>';
 echo '</div>';
 echo  $footer;
 echo $javascript;
+}else{
+	header('Location: ./');
+}
 ?>

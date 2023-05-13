@@ -3,11 +3,10 @@ require_once '../auth.php';
 require_once '../Models/teste.class.php';
 
 if(isset($_POST['update']) == 'Cadastrar'){
-	$idTeste = $_POST['idTeste'];
-	$teste->DelTeste($idTeste);
+$idTeste = $_POST['id'];
+$teste->DelTeste($idTeste);
 }
 else{
-	header('Location: ../../interface/teste/index.php');
+	header('Location: ../../interface/teste/');
 }
-
 ?>

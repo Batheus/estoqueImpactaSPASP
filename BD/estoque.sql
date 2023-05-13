@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 11-Maio-2023 às 17:30
+-- Tempo de geração: 13-Maio-2023 às 07:26
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.0.26
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `itens` (
   KEY `fk_Itens_Produto1_idx` (`Produto_CodRefProduto`),
   KEY `fk_Itens_Fornecedor1_idx` (`Fornecedor_idFornecedor`),
   KEY `fk_Itens_Usuario1_idx` (`Usuario_idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Extraindo dados da tabela `itens`
@@ -123,7 +123,42 @@ CREATE TABLE IF NOT EXISTS `itens` (
 
 INSERT INTO `itens` (`idItens`, `Image`, `QuantItens`, `QuantItensVend`, `ModeloItens`, `MarcaItens`, `MemoriaItens`, `CorItens`, `GradeItens`, `LocalItens`, `ItensAtivo`, `ItensPublic`, `Produto_CodRefProduto`, `Fornecedor_idFornecedor`, `Usuario_idUser`, `DataRegistro`) VALUES
 (24, 'dist/img/iphone5sred.jpg', '25', '0', 'iPhone 5s', 'Apple', '64gb', 'Vermelho', 'B', 'Prateleira B', 1, 1, 9, 22, 3, '2023-04-28 00:21:00'),
-(25, 'dist/img/ip11red.jpg', '10', '0', 'iPhone 11', 'Apple', '128gb', 'Vermelho', 'C', 'Prateleira C', 1, 1, 46, 22, 3, '2023-04-28 00:21:34');
+(25, 'dist/img/ip11red.jpg', '10', '0', 'iPhone 11', 'Apple', '128gb', 'Vermelho', 'C', 'Prateleira C', 1, 1, 46, 22, 3, '2023-04-28 00:21:34'),
+(29, 'dist/img/OIP.jpg', '5', '0', 'iPhone 11', 'Apple', '128gb', 'Azul', 'B', 'Prateleira 2', 1, 1, 46, 23, 3, '2023-05-13 01:35:50');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `manutencao`
+--
+
+DROP TABLE IF EXISTS `manutencao`;
+CREATE TABLE IF NOT EXISTS `manutencao` (
+  `idManutencao` int NOT NULL AUTO_INCREMENT,
+  `ModeloManutencao` varchar(100) NOT NULL,
+  `GradeManutencao` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `IMEIManutencao` varchar(50) NOT NULL,
+  `StatusManutencao` varchar(50) NOT NULL,
+  `ObsManutencao` varchar(50) NOT NULL,
+  `ManutencaoAtivo` tinyint NOT NULL,
+  `ManutencaoPublic` int NOT NULL,
+  `Produto_CodRefProduto` int NOT NULL,
+  `Fornecedor_idFornecedor` int NOT NULL,
+  `Usuario_idUser` int NOT NULL,
+  `DataManutencao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idManutencao`),
+  KEY `fk_Manutencao_Produto1_idx` (`Produto_CodRefProduto`),
+  KEY `fk_Manutencao_Fornecedor1_idx` (`Fornecedor_idFornecedor`),
+  KEY `fk_Manutencao_Usuario1_idx` (`Usuario_idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Extraindo dados da tabela `manutencao`
+--
+
+INSERT INTO `manutencao` (`idManutencao`, `ModeloManutencao`, `GradeManutencao`, `IMEIManutencao`, `StatusManutencao`, `ObsManutencao`, `ManutencaoAtivo`, `ManutencaoPublic`, `Produto_CodRefProduto`, `Fornecedor_idFornecedor`, `Usuario_idUser`, `DataManutencao`) VALUES
+(11, 'iPhone 8', 'A', '23154354', 'OK', 'Tudo OK', 1, 1, 9, 22, 3, '2023-05-12 20:03:48'),
+(31, 'Galaxy S23 Ultra 512gb', 'A', '897524', 'OK', 'OK', 1, 1, 9, 22, 0, '2023-05-13 01:39:10');
 
 -- --------------------------------------------------------
 
@@ -151,6 +186,63 @@ INSERT INTO `produtos` (`CodRefProduto`, `skuProduto`, `NomeProduto`, `Ativo`, `
 (9, 'GA1626RED64GB', 'iPhone 5s 64gb RED', 1, 1, 3),
 (46, 'GA5548BLUE128gb', 'iPhone 11 128gb Azul', 1, 1, 3),
 (51, 'SMGLS23U512GB', 'Samsung Galaxy S23 Ultra Violeta 512GB', 1, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `teste`
+--
+
+DROP TABLE IF EXISTS `teste`;
+CREATE TABLE IF NOT EXISTS `teste` (
+  `idTeste` int NOT NULL AUTO_INCREMENT,
+  `ModeloTeste` varchar(100) NOT NULL,
+  `GradeTeste` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `IMEITeste` varchar(50) NOT NULL,
+  `StatusTeste` varchar(50) NOT NULL,
+  `ObsTeste` varchar(50) NOT NULL,
+  `Wifi` varchar(50) NOT NULL,
+  `ConectorUSB` varchar(50) NOT NULL,
+  `ConectorP2` varchar(50) NOT NULL,
+  `Bateria` varchar(50) NOT NULL,
+  `Display` varchar(50) NOT NULL,
+  `Touch` varchar(50) NOT NULL,
+  `Biometria` varchar(50) NOT NULL,
+  `Botoes` varchar(50) NOT NULL,
+  `Vibracall` varchar(50) NOT NULL,
+  `CamT` varchar(50) NOT NULL,
+  `CamF` varchar(50) NOT NULL,
+  `Flash` varchar(50) NOT NULL,
+  `Chip1` varchar(50) NOT NULL,
+  `Chip2` varchar(50) NOT NULL,
+  `AntRede` varchar(50) NOT NULL,
+  `Mic1` varchar(50) NOT NULL,
+  `Mic2` varchar(50) NOT NULL,
+  `Sensor` varchar(50) NOT NULL,
+  `VivaVoz` varchar(50) NOT NULL,
+  `SiriGoogle` varchar(50) NOT NULL,
+  `Carcaca` varchar(50) NOT NULL,
+  `Tela` varchar(50) NOT NULL,
+  `Traseira` varchar(50) NOT NULL,
+  `TesteAtivo` int NOT NULL,
+  `TestePublic` int NOT NULL,
+  `Produto_CodRefProduto` int NOT NULL,
+  `Fornecedor_idFornecedor` int NOT NULL,
+  `Usuario_idUser` int NOT NULL,
+  `DataTeste` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idTeste`),
+  KEY `fk_Teste_Produto1_idx` (`Produto_CodRefProduto`),
+  KEY `fk_Teste_Fornecedor1_idx` (`Fornecedor_idFornecedor`),
+  KEY `fk_Teste_Usuario1_idx` (`Usuario_idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Extraindo dados da tabela `teste`
+--
+
+INSERT INTO `teste` (`idTeste`, `ModeloTeste`, `GradeTeste`, `IMEITeste`, `StatusTeste`, `ObsTeste`, `Wifi`, `ConectorUSB`, `ConectorP2`, `Bateria`, `Display`, `Touch`, `Biometria`, `Botoes`, `Vibracall`, `CamT`, `CamF`, `Flash`, `Chip1`, `Chip2`, `AntRede`, `Mic1`, `Mic2`, `Sensor`, `VivaVoz`, `SiriGoogle`, `Carcaca`, `Tela`, `Traseira`, `TesteAtivo`, `TestePublic`, `Produto_CodRefProduto`, `Fornecedor_idFornecedor`, `Usuario_idUser`, `DataTeste`) VALUES
+(12, 'iPhone 12', 'A', '1324512', 'OK', 'Tudo funcionando corretamente', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 'Funcionando', 1, 1, 9, 22, 3, '2023-05-13 03:33:45'),
+(30, 'Galaxy S23 Ultra', 'S', '234423', 'OK', 'Novo Lacrado', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 'Funcionando', 'Defeituoso', 1, 1, 9, 22, 0, '2023-05-13 07:11:57');
 
 -- --------------------------------------------------------
 

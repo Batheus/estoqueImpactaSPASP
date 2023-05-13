@@ -1,71 +1,67 @@
-    <?php
-     require_once 'connect.php';
-      class Teste extends Connect
-     {
-     	public function index($value = NULL)
-     	{
-        if($value == NULL){
-          $value = 1;
-        }
-
-     		$this->query = "SELECT * FROM `teste` WHERE `Public` = '$value'";
-     		$this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
-
+<?php
+   require_once 'connect.php';
+   class Teste extends Connect{
+    public function listTeste ($idprodutos, $idFornecedor){
+      $query = "SELECT * FROM `teste`,`fornecedor`,`produtos` WHERE (`Fornecedor_idFornecedor` = `idFornecedor` AND `Produto_CodRefProduto` = `CodRefProduto`) AND (`Fornecedor_idFornecedor` = '$idFornecedor' AND `Produto_CodRefProduto` = '$idprodutos') ";
+      $result = mysqli_query($this->SQL, $query) or die ( mysqli_error($this->SQL));
+     while($rowlist = mysqli_fetch_array($result)){
+           $skuProduto = $rowlist['skuProduto'];
+           $fornecedor  = $rowlist['NomeFornecedor'];
+      }
+        return array('skuProduto'=> $skuProduto,'Fornecedor'=> $fornecedor ,); 
+    }
+   	public function index($value){
+   		$this->query = "SELECT * FROM `teste`,`fornecedor`,`produtos` WHERE (`Fornecedor_idFornecedor` = `idFornecedor` AND `Produto_CodRefProduto` = `CodRefProduto`) AND `TestePublic` = '$value'";
+   		$this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
    		if($this->result){
-
         echo '<table class="table">
     <thead class="thead-inverse">
       <tr>
-        <th>Ativo</th>
-        <th>Funcionário</th>
-        <th>Aparelho</th>
+        <th>ID</th>
+        <th>SKU</th>
+        <th>Fornecedor</th>
         <th>Modelo</th>
+        <th>Grade</th>
         <th>IMEI</th>
         <th>Status</th>
         <th>Observação</th>
-        <th>Grade</th>
-        <th>Fornecedor</th>
         <th>Data</th>
         <th>Editar</th>
-        <th>Info</th>
+        <th>Checklist</th>
+        <th>Deletar</th>
       </tr>
     </thead>
     <tbody>';
 
    			while ($row = mysqli_fetch_array($this->result)) {
-          if($row['Ativo'] == 0){ $c ='class="label-warning"'; }else{ $c =" ";}
-          echo '<tr '.$c.'><th>';
-          $Ativo = $row['Ativo'];
+          echo '<tr>';
+          $id = $row['idTeste'];
 
-          echo '<form class="label" name="ativ'.$row['idTeste'].'" action="../../App/Database/action.php" method="post">
-          <input type="hidden" name="id" id="id" value="'.$row['idTeste'].'">
-          <input type="hidden" name="status" id="status" value="'.$row['Ativo'].'">
-          <input type="hidden" name="tabela" id="tabela" value="teste">  
-          <input type="checkbox" id="status" name="status" ';
-          if($row['Ativo'] == 1){ echo 'checked'; } 
-          echo ' value="'.$row['Ativo'].'" onclick="this.form.submit();"></form>
-          </th>';
-
-          echo '<td>'.$row['FuncionarioTeste'].'</td>
-          <td>'.$row['AparelhoTeste'].'</td>
+          echo '<form class="label" name="ativ'.$id.'" action="../../App/Database/action.php" method="post">
+          <input type="hidden" name="id" id="id" value="'.$id.'">
+          <input type="hidden" name="tabela" id="tabela" value="teste"></form>';
+          
+          echo '<td>'.$row['idTeste'].'</td>
+          <td>'.$row['skuProduto'].'</td>
+          <td>'.$row['NomeFornecedor'].'</td>
           <td>'.$row['ModeloTeste'].'</td>
+          <td>'.$row['GradeTeste'].'</td>
           <td>'.$row['IMEITeste'].'</td>
           <td>'.$row['StatusTeste'].'</td>
-          <td>'.$row['ObservacaoTeste'].'</td>
-          <td>'.$row['GradeTeste'].'</td>
-          <td>'.$row['FornecedorTeste'].'</td>
-          <td>'.$row['DataRegistro'].'</td>
+          <td>'.$row['ObsTeste'].'</td>
+          <td>'.$row['DataTeste'].'</td>
           
           <td>
-                    <a href="editteste.php?id='.$row['idTeste'].'"><i class="fa fa-edit"></i></a> 
+                <a href="editteste.php?q='.$row['idTeste'].'"><i class="fa fa-edit"></i></a>
           </td>
+
           <td>
-                    <a href="" data-toggle="modal" data-target="#myModal'.$row['idTeste'].'">';
-                    if($row['Public'] == 0){echo '<i class="glyphicon glyphicon-search" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-search" aria-hidden="true"></i>';}
+                    <a href="" data-toggle="modal" data-target="#ModalChecklist'.$row['idTeste'].'">';
+                    if($row['TestePublic'] == 0){echo '<i class="glyphicon glyphicon-search" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-search" aria-hidden="true"></i>';}
                     echo '</a>
                     <div>
-                    <form id="delTest'.$row['idTeste'].'" name="delTest'.$row['idTeste'].'" action="../../App/Database/delTeste.php" method="post" style="color:#000;">
-                    <div class="modal fade" id="myModal'.$row['idTeste'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <form id="relatorioChecklist'.$row['idTeste'].'" name="relatorioChecklist'.$row['idTeste'].'" action="" method="" style="color:#000;">
+                    <div class="modal fade" id="ModalChecklist'.$row['idTeste'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -156,142 +152,184 @@
                       </div>
                       </form></div>
           </td>
+
+          <td>
+                    <a href="" data-toggle="modal" data-target="#myModal'.$row['idTeste'].'">';
+                    if($row['TestePublic'] == 0){echo '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';}else{ echo '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';}
+                    echo '</a>
+  <div>
+    <form id="delTeste'.$row['idTeste'].'" name="delTeste'.$row['idTeste'].'" action="../../App/Database/delTeste.php" method="post" style="color:#000;">
+    <div class="modal fade" id="myModal'.$row['idTeste'].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Você tem certeza que deseja deletar este item?</h4>
+          </div>
+          <div class="modal-body">
+            Código: '.$row['idTeste'].' - '.$row['skuProduto'].' - '.$row['NomeFornecedor'].'
+          </div>
+          <input type="hidden" id="id" name="id" value="'.$row['idTeste'].'">
+          <div class="modal-footer">
+            <button type="submit" value="Cancelar" class="btn btn-default">Não</button>
+            <button type="submit" name="update" value="Cadastrar" class="btn btn-primary">Sim</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form></div>
+          </td>
             </tr>';
           }
           echo '</tbody>
   </table>';
         }
-
       }
 
-     	public function listteste(){
-     		$this->query = "SELECT * FROM `teste` WHERE (`Public` = 1) AND (`Ativo` = 1)";
-     		$this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
-     		if($this->result){
-     			while ($row = mysqli_fetch_array($this->result)) {
-            if($value == $row['idTeste']){
-              $selected = "selected";
-            }else{
-              $selected = "";
-            }
-     				echo '<option value="'.$row['idTeste'].'" '.$selected.' >'.$row['IMEITeste'].'</option>';
-     			}
-     	}
-     }
-
-     	public function InsertTeste($FuncionarioTeste, $AparelhoTeste, $ModeloTeste, $IMEITeste, $StatusTeste, $ObservacaoTeste, $GradeTeste, $FornecedorTeste, $Wifi, $ConectorUSB, $ConectorP2, $Bateria, $Display, $Touch, $Biometria, $Botoes, $Vibracall, $CamT, $CamF, $Flash, $Chip1, $Chip2, $AntRede, $Mic1, $Mic2, $Sensor, $VivaVoz, $SiriGoogle, $Carcaca, $Tela, $Traseira, $idUsuario, $status)
-      {
-        $this->query = "SELECT * FROM `teste` WHERE `IMEITeste` = '$IMEITeste'";
-        $this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
-        $total = mysqli_num_rows($this->result); 
-        if($total > 0){       
-          $row = mysqli_fetch_array($this->result);
-          $idTeste = $row['idTeste'];
-        }else{
-         $query = "INSERT INTO `teste`(`FuncionarioTeste`, `AparelhoTeste`, `ModeloTeste`, `IMEITeste`, `StatusTeste`, `ObservacaoTeste`, `GradeTeste`, `FornecedorTeste`, `Wifi`, `ConectorUSB`, `ConectorP2`, `Bateria`, `Display`, `Touch`, `Biometria`, `Botoes`, `Vibracall`, `CamT`, `CamF`, `Flash`, `Chip1`, `Chip2`, `AntRede`, `Mic1`, `Mic2`, `Sensor`, `VivaVoz`, `SiriGoogle`, `Carcaca`, `Tela`, `Traseira`, `Public`, `Ativo`, `Usuario_idUser`) VALUES ('$FuncionarioTeste', '$AparelhoTeste', '$ModeloTeste', '$IMEITeste', '$StatusTeste', '$ObservacaoTeste', '$GradeTeste', '$FornecedorTeste', '$Wifi', '$ConectorUSB', '$ConectorP2', '$Bateria', '$Display', '$Touch', '$Biometria', '$Botoes', '$Vibracall', '$CamT', '$CamF', '$Flash', '$Chip1', '$Chip2', '$AntRede', '$Mic1', '$Mic2', '$Sensor', '$VivaVoz', '$SiriGoogle', '$Carcaca', '$Tela', '$Traseira', 1 , 1 , '$idUsuario')";
-          $result = mysqli_query($this->SQL, $query) or die(mysqli_error($this->SQL));
-          $idTeste = mysqli_insert_id($this->SQL);
-        }
-          if($idTeste > 0){ 
-              if($this->query = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
-                  header('Location: ../../interface/teste/index.php?alert=1'); 
-              }else{
-                  header('Location: ../../interface/teste/index.php?alert=0');
-              } 
-            }else{
-             header("Location: ../../interface/teste/index.php?alert=0");
-            }
-     	}
-      public function EditTeste($idTeste){
-        $this->query = "SELECT *FROM `teste` WHERE `idTeste` = '$idTeste'";
-        if($this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL))){
-          if($row = mysqli_fetch_array($this->result)){
-
-            //Informações
-            $FuncionarioTeste = $row['FuncionarioTeste'];
-            $AparelhoTeste = $row['AparelhoTeste'];
-            $ModeloTeste = $row['ModeloTeste'];
-            $IMEITeste = $row['IMEITeste'];
-            $StatusTeste = $row['StatusTeste'];
-            $ObservacaoTeste = $row['ObservacaoTeste'];
-            $GradeTeste = $row['GradeTeste'];
-            $FornecedorTeste = $row['FornecedorTeste'];
-
-            //Checklist
-            $Wifi = $row['Wifi'];
-            $ConectorUSB = $row['ConectorUSB'];
-            $ConectorP2 = $row['ConectorP2'];
-            $Bateria = $row['Bateria'];
-            $Display = $row['Display'];
-            $Touch = $row['Touch'];
-            $Biometria = $row['Biometria'];
-            $Botoes = $row['Botoes'];
-            $Vibracall = $row['Vibracall'];
-            $CamT = $row['CamT'];
-            $CamF = $row['CamF'];
-            $Flash = $row['Flash'];
-            $Chip1 = $row['Chip1'];
-            $Chip2 = $row['Chip2'];
-            $AntRede = $row['AntRede'];
-            $Mic1 = $row['Mic1'];
-            $Mic2 = $row['Mic2'];
-            $Sensor = $row['Sensor'];
-            $VivaVoz = $row['VivaVoz'];
-            $SiriGoogle = $row['SiriGoogle'];
-
-            //Cosmético
-            $Carcaca = $row['Carcaca'];
-            $Tela = $row['Tela'];
-            $Traseira = $row['Traseira'];
-            
-            $Ativo = $row['Ativo'];
-            $Usuario_idUser  = $row['Usuario_idUser'];
-
-              $array = array('Teste' => array('Funcionario' => $FuncionarioTeste, 'Aparelho' => $AparelhoTeste, 'Modelo'=> $ModeloTeste, 'IMEI'=>$IMEITeste, 'Status' => $StatusTeste, 'Observacao' => $ObservacaoTeste, 'Grade' => $GradeTeste, 'Fornecedor' => $FornecedorTeste, 'Ativo' => $Ativo, 'Wifi' => $Wifi, 'ConectorUSB' => $ConectorUSB, 'ConectorP2' => $ConectorP2, 'Bateria' => $Bateria, 'Display' => $Display, 'Touch' => $Touch, 'Biometria' => $Biometria, 'Botoes' => $Botoes, 'Vibracall' => $Vibracall, 'CamT' => $CamT, 'CamF' => $CamF, 'Flash' => $Flash, 'Chip1' => $Chip1, 'Chip2' => $Chip2, 'AntRede' => $AntRede, 'Mic1' => $Mic1, 'Mic2' => $Mic2, 'Sensor' => $Sensor, 'VivaVoz' => $VivaVoz, 'SiriGoogle' => $SiriGoogle, 'Carcaca' => $Carcaca, 'Tela' => $Tela, 'Traseira' => $Traseira, 'Usuario' => $Usuario_idUser ),);
-              return $array;
-          }
-
-        }else{
-          return 0;
-        }
+      public function InsertTeste($ModeloTeste, $IMEITeste, $StatusTeste, $ObsTeste, $GradeTeste, $Wifi, $ConectorUSB, $ConectorP2, $Bateria, $Display, $Touch, $Biometria, $Botoes, $Vibracall, $CamT, $CamF, $Flash, $Chip1, $Chip2, $AntRede, $Mic1, $Mic2, $Sensor, $VivaVoz, $SiriGoogle, $Carcaca, $Tela, $Traseira, $Produto_CodRefProduto, $Fornecedor_idFornecedor, $idUsuario){
+       $this->query = "INSERT INTO `teste`(`idTeste`, `ModeloTeste`, `IMEITeste`, `StatusTeste`, `ObsTeste`, `GradeTeste`, `Wifi`, `ConectorUSB`, `ConectorP2`, `Bateria`, `Display`, `Touch`, `Biometria`, `Botoes`, `Vibracall`, `CamT`, `CamF`, `Flash`, `Chip1`, `Chip2`, `AntRede`, `Mic1`, `Mic2`, `Sensor`, `VivaVoz`, `SiriGoogle`, `Carcaca`, `Tela`, `Traseira`, `TesteAtivo`, `TestePublic`, `Produto_CodRefProduto`, `Fornecedor_idFornecedor`, `Usuario_idUser`) VALUES 
+       (NULL, '$ModeloTeste', '$IMEITeste', '$StatusTeste', '$ObsTeste', '$GradeTeste', '$Wifi', '$ConectorUSB', '$ConectorP2', '$Bateria', '$Display', '$Touch', '$Biometria', '$Botoes', '$Vibracall', '$CamT', '$CamF', '$Flash', '$Chip1', '$Chip2', '$AntRede', '$Mic1', '$Mic2', '$Sensor', '$VivaVoz', '$SiriGoogle', '$Carcaca', '$Tela', '$Traseira', 1, 1, '$Produto_CodRefProduto', '$Fornecedor_idFornecedor', '$idusuario')";
+       if($this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
+        header('Location: ../../interface/teste/index.php?alert=1');
       }
+      else{
+        header('Location: ../../interface/teste/index.php?alert=0');
+      }
+   	}
 
-      public function UpdateTeste($idTeste, $FuncionarioTeste, $AparelhoTeste, $ModeloTeste, $IMEITeste, $StatusTeste, $ObservacaoTeste, $GradeTeste, $FornecedorTeste, $Wifi, $ConectorUSB, $ConectorP2, $Bateria, $Display, $Touch, $Biometria, $Botoes, $Vibracall, $CamT, $CamF, $Flash, $Chip1, $Chip2, $AntRede, $Mic1, $Mic2, $Sensor, $VivaVoz, $SiriGoogle, $Carcaca, $Tela, $Traseira, $Ativo, $idUsuario)
-      {
-        $this->query = "UPDATE `teste` SET `FuncionarioTeste`= '$FuncionarioTeste', `AparelhoTeste`='$AparelhoTeste',`ModeloTeste`='$ModeloTeste',`IMEITeste`='$IMEITeste',`StatusTeste`='$StatusTeste', `ObservacaoTeste`='$ObservacaoTeste', `GradeTeste`='$GradeTeste', `FornecedorTeste`='$FornecedorTeste', `Wifi`='$Wifi', `ConectorUSB`='$ConectorUSB', `ConectorP2`='$ConectorP2', `Bateria`='$Bateria', `Display`='$Display', `Touch`='$Touch', `Biometria`='$Biometria', `Botoes`='$Botoes', `Vibracall`='$Vibracall', `CamT`='$CamT', `CamF`='$CamF', `Flash`='$Flash', `Chip1`='$Chip1', `Chip2`='$Chip2', `AntRede`='$AntRede', `Mic1`='$Mic1', `Mic2`='$Mic2', `Sensor`='$Sensor', `VivaVoz`='$VivaVoz', `SiriGoogle`='$SiriGoogle', `Carcaca`='$Carcaca', `Tela`='$Tela', `Traseira`='$Traseira', `Ativo` = '$Ativo' ,`Usuario_idUser`='$idUsuario' WHERE `idTeste` = '$idTeste'";
+    public function editTeste($value)
+    {
+      $this->query = "SELECT *FROM `teste` WHERE `idTeste` = '$value'";
+      $this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL));
+
+      if($row = mysqli_fetch_array($this->result)){
+        $idTeste = $row['idTeste'];
+        $ModeloTeste = $row['ModeloTeste'];
+        $GradeTeste = $row['GradeTeste'];
+        $IMEITeste = $row['IMEITeste'];
+        $StatusTeste = $row['StatusTeste'];
+        $ObsTeste = $row['ObsTeste'];
+        $Wifi = $row['Wifi'];
+        $ConectorUSB = $row['ConectorUSB'];
+        $ConectorP2 = $row['ConectorP2'];
+        $Bateria = $row['Bateria'];
+        $Display = $row['Display'];
+        $Touch = $row['Touch'];
+        $Biometria = $row['Biometria'];
+        $Botoes = $row['Botoes'];
+        $Vibracall = $row['Vibracall'];
+        $CamT = $row['CamT'];
+        $CamF = $row['CamF'];
+        $Flash = $row['Flash'];
+        $Chip1 = $row['Chip1'];
+        $Chip2 = $row['Chip2'];
+        $AntRede = $row['AntRede'];
+        $Mic1 = $row['Mic1'];
+        $Mic2 = $row['Mic2'];
+        $Sensor = $row['Sensor'];
+        $VivaVoz = $row['VivaVoz'];
+        $SiriGoogle = $row['SiriGoogle'];
+        $Carcaca = $row['Carcaca'];
+        $Tela = $row['Tela'];
+        $Traseira = $row['Traseira'];
+        $Produto_CodRefProduto = $row['Produto_CodRefProduto'];
+        $Fornecedor_idFornecedor = $row['Fornecedor_idFornecedor'];
+
+        return $resp = array('Teste' => ['idTeste' => $idTeste,
+          'ModeloTeste' => $ModeloTeste,
+          'GradeTeste' => $GradeTeste,
+          'IMEITeste' => $IMEITeste,
+          'StatusTeste' => $StatusTeste,
+          'ObsTeste' => $ObsTeste,
+          'Wifi' => $Wifi,
+          'ConectorUSB' => $ConectorUSB,
+          'ConectorP2' => $ConectorP2,
+          'Bateria' => $Bateria,
+          'Display' => $Display,
+          'Touch' => $Touch,
+          'Biometria' => $Biometria,
+          'Botoes' => $Botoes,
+          'Vibracall' => $Vibracall,
+          'CamT' => $CamT,
+          'CamF' => $CamF,
+          'Flash' => $Flash,
+          'Chip1' => $Chip1,
+          'Chip2' => $Chip2,
+          'AntRede' => $AntRede,
+          'Mic1' => $Mic1,
+          'Mic2' => $Mic2,
+          'Sensor' => $Sensor,
+          'VivaVoz' => $VivaVoz,
+          'SiriGoogle' => $SiriGoogle,
+          'Carcaca' => $Carcaca,
+          'Tela' => $Tela,
+          'Traseira' => $Traseira,
+          'CodRefProduto' => $Produto_CodRefProduto,
+          'idFornecedor' => $Fornecedor_idFornecedor ] , );  
+      }
+    }
+
+    public function updateTeste($idTeste,$ModeloTeste, $IMEITeste, $StatusTeste, $ObsTeste, $GradeTeste, $Wifi, $ConectorUSB, $ConectorP2, $Bateria, $Display, $Touch, $Biometria, $Botoes, $Vibracall, $CamT, $CamF, $Flash, $Chip1, $Chip2, $AntRede, $Mic1, $Mic2, $Sensor, $VivaVoz, $SiriGoogle, $Carcaca, $Tela, $Traseira, $Produto_CodRefProduto, $Fornecedor_idFornecedor, $idUsuario)
+    {
+      $this->query = "UPDATE `teste` SET
+      `ModeloTeste`='$ModeloTeste',
+      `GradeTeste`='$GradeTeste',
+      `IMEITeste`='$IMEITeste',
+      `StatusTeste`='$StatusTeste',
+      `ObsTeste`='$ObsTeste',
+      `Wifi`='$Wifi',
+      `ConectorUSB`='$ConectorUSB',
+      `ConectorP2`='$ConectorP2',
+      `Bateria`='$Bateria',
+      `Display`='$Display',
+      `Touch`='$Touch',
+      `Biometria`='$Biometria',
+      `Botoes`='$Botoes',
+      `Vibracall`='$Vibracall',
+      `CamT`='$CamT',
+      `CamF`='$CamF',
+      `Flash`='$Flash',
+      `Chip1`='$Chip1',
+      `Chip2`='$Chip2',
+      `AntRede`='$AntRede',
+      `Mic1`='$Mic1',
+      `Mic2`='$Mic2',
+      `Sensor`='$Sensor',
+      `VivaVoz`='$VivaVoz',
+      `SiriGoogle`='$SiriGoogle',
+      `Carcaca`='$Carcaca',
+      `Tela`='$Tela',
+      `Traseira`='$Traseira',
+      `Produto_CodRefProduto`='$Produto_CodRefProduto',
+      `Fornecedor_idFornecedor`='$Fornecedor_idFornecedor',
+      `Usuario_idUser`='$idusuario' 
+      WHERE `idTeste`= '$idTeste'";
+
+      if($this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
+        header('Location: ../../interface/teste/index.php?alert=1');
+      }
+      else{
+        header('Location: ../../interface/teste/index.php?alert=0');
+      }
+    }
+
+     public function DelTeste($value){
+        $this->query = "DELETE FROM `teste` WHERE `idTeste` = '$value'";
         if($this->query = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
-                  header('Location: ../../interface/teste/index.php?alert=5'); 
-              }else{
-                  header('Location: ../../interface/teste/index.php?alert=0');
-              }
-      }
+          header('Location: ../../interface/teste/index.php?alert=5'); 
+        }
+        else{
+            header('Location: ../../interface/teste/index.php?alert=0');
+        }
+    } 
 
-      public function DelTeste($idTeste)
-      {
-        $this->query = "SELECT * FROM `teste` WHERE `idTeste` = '$idTeste'";
-        $this->result = mysqli_query($this->SQL, $this->query);
-        if($row = mysqli_fetch_array($this->result)){
-                $id = $row['idTeste'];
-                $public = $row['Public'];
-                if($public == 1){
-                  $p = 0;
-                }else{
-                  $p = 1;
-                }
-                mysqli_query($this->SQL, "UPDATE `teste` SET `Public` = '$p' WHERE `idTeste` = '$id'") or die(mysqli_error($this->SQL));
-                header('Location: ../../interface/teste/index.php?alert=1');
-        }else{
-                header('Location: ../../interface/teste/index.php?alert=0');
-        } 
-  }
-    
     public function Ativo($value, $id)
     {
       if($value == 0){ $v = 1; }else{ $v = 0; }
-      $this->query = "UPDATE `teste` SET `Ativo` = '$v' WHERE `idTeste` = '$id'";
+      $this->query = "UPDATE `teste` SET `TesteAtivo` = '$v' WHERE `idTeste` = '$id'";
       $this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL));
       header('Location: ../../interface/teste/');
     }
-  }
+}
 
 $teste = new Teste;
