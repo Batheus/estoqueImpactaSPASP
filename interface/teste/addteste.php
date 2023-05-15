@@ -56,8 +56,8 @@ echo '
                   <input type="text" name="IMEITeste" class="form-control" id="exampleInputEmail1" placeholder="IMEI">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Status da manutenção</label>
-                  <input type="text" name="StatusTeste" class="form-control" id="exampleInputEmail1" placeholder="Status da manutenção">
+                  <label for="exampleInputEmail1">Status do aparelho</label>
+                  <input type="text" name="StatusTeste" class="form-control" id="exampleInputEmail1" placeholder="Status do aparelho">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Observações</label>

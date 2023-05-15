@@ -59,12 +59,12 @@ echo '
                   <input type="text" name="IMEITeste" class="form-control" id="exampleInputEmail1" placeholder="IMEI" value="'.$resp['Teste']['IMEITeste'].'">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Status da manutenção</label>
-                  <input type="text" name="StatusTeste" class="form-control" id="exampleInputEmail1" placeholder="Status da manutenção" value="'.$resp['Teste']['StatusTeste'].'">
+                  <label for="exampleInputEmail1">Status do aparelho</label>
+                  <input type="text" name="StatusTeste" class="form-control" id="exampleInputEmail1" placeholder="Status do aparelho" value="'.$resp['Teste']['StatusTeste'].'">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Observação da manutenção</label>
-                  <input type="text" name="ObsTeste" class="form-control" id="exampleInputEmail1" placeholder="Observação da manutenção" value="'.$resp['Teste']['ObsTeste'].'">
+                  <label for="exampleInputEmail1">Observações</label>
+                  <input type="text" name="ObsTeste" class="form-control" id="exampleInputEmail1" placeholder="Observações" value="'.$resp['Teste']['ObsTeste'].'">
                 </div>
 
                 <div class="form-group">
