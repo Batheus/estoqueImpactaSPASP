@@ -17,8 +17,8 @@ echo '<section class="content">
     <div class="icon">
       <i class="ion ion-person"></i>
     </div>
-    <a href="#" class="small-box-footer">Clientes <i class="fa fa-arrow-circle-right"></i></a>
-    <a href="#" class="small-box-footer">Fornecedores <i class="fa fa-arrow-circle-right"></i></a>
+    <a href="'.$url.'cliente/" class="small-box-footer">Clientes <i class="fa fa-arrow-circle-right"></i></a>
+    <a href="'.$url.'fornecedor/" class="small-box-footer">Fornecedores <i class="fa fa-arrow-circle-right"></i></a>
     <a href="'.$url.'usuarios/" class="small-box-footer">Funcionários <i class="fa fa-arrow-circle-right"></i></a>
   </div>
 </div>
@@ -32,8 +32,8 @@ echo '<section class="content">
       <div class="icon">
         <i class="ion ion-ios-box"></i>
       </div>
-      <a href="#" class="small-box-footer">Estoque completo <i class="fa fa-arrow-circle-right"></i></a>
-      <a href="#" class="small-box-footer">Lista de SKU <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="'.$url.'itens/" class="small-box-footer">Estoque completo <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="'.$url.'prod/" class="small-box-footer">Lista de SKU <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   
@@ -46,8 +46,8 @@ echo '<section class="content">
       <div class="icon">
         <i class="ion ion-settings"></i>
       </div>
-      <a href="#" class="small-box-footer">Manutenção <i class="fa fa-arrow-circle-right"></i></a>
-      <a href="#" class="small-box-footer">Teste <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="'.$url.'manutencao/" class="small-box-footer">Manutenção <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="'.$url.'teste/" class="small-box-footer">Teste <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   
@@ -60,7 +60,7 @@ echo '<section class="content">
       <div class="icon">
         <i class="ion ion-android-cart"></i>
       </div>
-      <a href="#" class="small-box-footer">Realizar saída de aparelho(s) <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="'.$url.'vendas/" class="small-box-footer">Realizar saída de aparelho(s) <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
 </div>';
