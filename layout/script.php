@@ -280,10 +280,10 @@ $header = '<header class="main-header">
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de SKU</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Adicionar SKU</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Estoque Completo</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Estoque Atual</a></li>
+            <li><a href="'.$url.'prod/"><i class="fa fa-circle-o"></i>Lista de SKU</a></li>
+            <li><a href="'.$url.'prod/addprod.php"><i class="fa fa-circle-o"></i>Adicionar SKU</a></li>
+            <li><a href="'.$url.'itens/"><i class="fa fa-circle-o"></i>Estoque Completo</a></li>
+            <li><a href="'.$url.'itens/totalitens.php"><i class="fa fa-circle-o"></i>Estoque Atual</a></li>
           </ul>
         </li>
 
@@ -296,8 +296,8 @@ $header = '<header class="main-header">
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Testes</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Registrar Teste</a></li>
+            <li><a href="'.$url.'teste/"><i class="fa fa-circle-o"></i>Lista de Testes</a></li>
+            <li><a href="'.$url.'teste/addteste.php"><i class="fa fa-circle-o"></i>Registrar Teste</a></li>
           </ul>
         </li>
 
@@ -310,8 +310,8 @@ $header = '<header class="main-header">
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Manutenção</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Registrar Manutenção</a></li>
+            <li><a href="'.$url.'manutencao/"><i class="fa fa-circle-o"></i>Lista de Manutenção</a></li>
+            <li><a href="'.$url.'manutencao/addmanutencao.php"><i class="fa fa-circle-o"></i>Registrar Manutenção</a></li>
           </ul>
         </li>
 
@@ -324,8 +324,8 @@ $header = '<header class="main-header">
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Fornecedores</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Adicionar Fornecedor</a></li>
+            <li><a href="'.$url.'fornecedor/"><i class="fa fa-circle-o"></i>Lista de Fornecedores</a></li>
+            <li><a href="'.$url.'fornecedor/addfornecedor.php"><i class="fa fa-circle-o"></i>Adicionar Fornecedor</a></li>
           </ul>
         </li>
 
@@ -338,8 +338,8 @@ $header = '<header class="main-header">
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Usuários</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Adicionar Usuários</a></li>
+            <li><a href="'.$url.'usuarios/"><i class="fa fa-circle-o"></i>Lista de Usuários</a></li>
+            <li><a href="'.$url.'usuarios/addusuarios.php"><i class="fa fa-circle-o"></i>Adicionar Usuários</a></li>
           </ul>
         </li>
 
@@ -352,8 +352,8 @@ $header = '<header class="main-header">
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Lista de Clientes</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Adicionar Cliente</a></li>
+            <li><a href="'.$url.'cliente/"><i class="fa fa-circle-o"></i>Lista de Clientes</a></li>
+            <li><a href="'.$url.'cliente/addcliente.php"><i class="fa fa-circle-o"></i>Adicionar Cliente</a></li>
             
           </ul>
         </li>
@@ -367,7 +367,7 @@ $header = '<header class="main-header">
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Registrar Venda</a></li>
+            <li><a href="'.$url.'vendas/"><i class="fa fa-circle-o"></i>Registrar Venda</a></li>
             
           </ul>
         </li>
